@@ -1,1 +1,11 @@
 venv/
+presentation/.DS_Store
+presentation/node_modules
+presentation/build
+presentation/.svelte-kit
+presentation/package
+presentation/.env
+presentation/.env.*
+presentation/!.env.example
+presentation/vite.config.js.timestamp-*
+presnetation/vite.config.ts.timestamp-*
