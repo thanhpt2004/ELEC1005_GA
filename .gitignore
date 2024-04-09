@@ -9,3 +9,4 @@ presentation/.env.*
 presentation/!.env.example
 presentation/vite.config.js.timestamp-*
 presnetation/vite.config.ts.timestamp-*
+.idea/
