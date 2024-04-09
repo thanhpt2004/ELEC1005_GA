@@ -10,20 +10,29 @@ class Amazon:
     def __init__(self, section):
         self.section = section
         self.options = webdriver.ChromeOptions()
-        #self.options.add_argument("--headless")
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=self.options)
+        # self.options.add_argument("--headless")
+        self.driver = webdriver.Chrome(
+            service=Service(ChromeDriverManager().install()), options=self.options
+        )
 
     def lazy_loading(self, wait_time=2):
         current_height = self.driver.execute_script("return document.body.scrollHeight")
 
         while True:
-            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            self.driver.execute_script(
+                "window.scrollTo(0, document.body.scrollHeight);"
+            )
 
             try:
                 WebDriverWait(self.driver, wait_time).until(
-                    lambda driver: driver.execute_script
-                                   ("return window.innerHeight + document.body.scrollHeight") != current_height)
-                current_height = self.driver.execute_script("return window.innerHeight + document.body.scrollHeight")
+                    lambda driver: driver.execute_script(
+                        "return window.innerHeight + document.body.scrollHeight"
+                    )
+                    != current_height
+                )
+                current_height = self.driver.execute_script(
+                    "return window.innerHeight + document.body.scrollHeight"
+                )
             except TimeoutException:
                 break
 
@@ -45,12 +54,14 @@ class Amazon:
         all_products = homepage_soup.find("div", attrs={"class": "p13n-desktop-grid"})
 
         if all_products is not None:
-            for product_section in all_products.find_all("div", attrs={"id": "gridItemRoot"}):
+            for product_section in all_products.find_all(
+                "div", attrs={"id": "gridItemRoot"}
+            ):
                 for link in product_section.find_all("a", {"tabindex": "-1"}):
                     if link["href"].startswith("https:"):
                         links.append(link["href"])
                     else:
-                        links.append("https://www.amazon.com" + link["href"])
+                        links.append("https://www.amazon.com.au" + link["href"])
                 rank = product_section.find("span", {"class": "zg-bdg-text"})
                 ranks.append(rank.text)
 
@@ -58,38 +69,89 @@ class Amazon:
 
     def content(self, url):
         self.driver.get(url)
+        self.lazy_loading()
         page_content = self.driver.page_source
-        page_content_soup = BeautifulSoup(page_content, 'html.parser')
+        page_content_soup = BeautifulSoup(page_content, "html.parser")
         return page_content_soup
+
+
+def valid_sections():
+    sections = [
+        "amazon-devices",
+        "audible",
+        "automotive",
+        "baby-products",
+        "beauty",
+        "books",
+        "fashion",
+        "computers",
+        "electronics",
+        "garden",
+        "gift-cards",
+        "health",
+        "home",
+        "home-improvement",
+        "kitchen",
+        "lighting",
+        "movies-and-tv",
+        "music",
+        "musical-instruments",
+        "grocery",
+        "pet-supplies",
+        "software",
+        "sporting-goods",
+        "office-products",
+        "toys",
+        "videogames",
+    ]
+    return sections
 
 
 def product_name(soup):
     try:
-        name = soup.find('span', attrs={'id': "productTitle"}).text.strip()
+        name = soup.find("span", attrs={"id": "productTitle"}).text.strip()
     except:
         name = "Could Not Find a Name"
     return name
 
 
-amazon_test = Amazon("computers")
-urls = amazon_test.define_urls()
-product_links = []
-product_ranks = []
-names = []
+def product_price(soup):
+    try:
+        price = soup.find("span", attrs={"class": "a-price"}).text.strip()
+    except:
+        price = "Could Not Find a Price"
+    return price
 
-for page_url in urls:
-    amazon_test.driver.get(page_url)
-    amazon_test.lazy_loading()
-    plinks, pranks = amazon_test.links_ranks()
-    product_links.extend(plinks)
-    product_ranks.extend(pranks)
 
-for product in product_links:
-    product_soup = amazon_test.content(product)
-    the_name_of_the_product = product_name(product_soup)
-    print(the_name_of_the_product)
-    names.extend(the_name_of_the_product)
+def product_rating(soup):
+    try:
+        rating = soup.find(
+            "span", attrs={"data-hook": "rating-out-of-text"}
+        ).text.strip()
+    except:
+        rating = "Could Not Find a Rating"
+    return rating
 
-print(product_links)
-print(product_ranks)
-print(names)
+
+test_amazon = Amazon("electronics")
+
+urls = test_amazon.define_urls()
+section_links = []
+section_ranks = []
+
+
+for url in urls:
+    test_amazon.driver.get(url)
+    test_amazon.lazy_loading()
+    plinks, pranks = test_amazon.links_ranks()
+    section_links.extend(plinks)
+    section_ranks.extend(pranks)
+
+
+# print(section_links)
+
+for link in section_links:
+    content = test_amazon.content(link)
+    print(product_name(content))
+    print(product_price(content))
+    print(product_rating(content))
