@@ -10,7 +10,7 @@ class Amazon:
     def __init__(self, section):
         self.section = section
         self.options = webdriver.ChromeOptions()
-        # self.options.add_argument("--headless")
+        self.options.add_argument("--headless")
         self.driver = webdriver.Chrome(
             service=Service(ChromeDriverManager().install()), options=self.options
         )
@@ -133,25 +133,25 @@ def product_rating(soup):
     return rating
 
 
-test_amazon = Amazon("electronics")
+# test_amazon = Amazon("electronics")
 
-urls = test_amazon.define_urls()
-section_links = []
-section_ranks = []
-
-
-for url in urls:
-    test_amazon.driver.get(url)
-    test_amazon.lazy_loading()
-    plinks, pranks = test_amazon.links_ranks()
-    section_links.extend(plinks)
-    section_ranks.extend(pranks)
+# urls = test_amazon.define_urls()
+# section_links = []
+# section_ranks = []
 
 
-# print(section_links)
+# for url in urls:
+#     test_amazon.driver.get(url)
+#     test_amazon.lazy_loading()
+#     plinks, pranks = test_amazon.links_ranks()
+#     section_links.extend(plinks)
+#     section_ranks.extend(pranks)
 
-for link in section_links:
-    content = test_amazon.content(link)
-    print(product_name(content))
-    print(product_price(content))
-    print(product_rating(content))
+
+# # print(section_links)
+
+# for link in section_links:
+#     content = test_amazon.content(link)
+#     print(product_name(content))
+#     print(product_price(content))
+#     print(product_rating(content))
