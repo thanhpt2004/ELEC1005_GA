@@ -10,3 +10,4 @@ presentation/!.env.example
 presentation/vite.config.js.timestamp-*
 presnetation/vite.config.ts.timestamp-*
 .idea/
+python_logic/__pycache__/
