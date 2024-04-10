@@ -30,25 +30,28 @@
     videogames: false,
   };
 
+  let data = null;
   async function submitForm() {
     const selectedSections = Object.keys(sections).filter(
       (key) => sections[key]
     );
-    const response = await fetch("https:localhost:5100/api/amazon", {
+    console.log(selectedSections);
+    const response = await fetch("http://127.0.0.1:5100/api/amazon", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ sections: selectedSections }),
     });
-    const data = await response.json();
+    data = await response.json();
   }
 </script>
 
 <SectionWrapper>
   <h1 class="mb-4 text-4xl font-bold">Web Scraper Demo</h1>
   <h2 class="mb-4 text-2xl font-semibold">
-    Select the sections you want to scrape
+    Select the sections you want to scrape and receive the names, price and
+    rating of the top 5 products in that category.
   </h2>
   <div class="flex flex-col flex-1">
     <form class="flex flex-col" on:submit|preventDefault={submitForm}>
@@ -204,12 +207,23 @@
         />
         Video Games
       </label>
-      <div></div>
       <button
         type="submit"
         class="mt-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors duration-300"
         >Retrieve Data</button
       >
     </form>
+    {#if data}
+      {#each Object.keys(data) as section}
+        <h2>{section}</h2>
+        {#each data[section].product_names as name, index}
+          <div>
+            <h3>{name}</h3>
+            <p>Price: {data[section].product_prices[index]}</p>
+            <p>Rating: {data[section].product_ratings[index]}</p>
+          </div>
+        {/each}
+      {/each}
+    {/if}
   </div>
 </SectionWrapper>
