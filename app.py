@@ -8,6 +8,12 @@ CORS(app)
 
 @app.route("/api/amazon", methods=["POST"])
 def amazon_api():
+    """
+    Retrieves product information from Amazon API based on the provided sections.
+
+    Returns:
+        A JSON response containing product names, prices, and ratings for each section.
+    """
     amazon_instances = {}
     sections = request.get_json().get("sections", [])
     print(sections)

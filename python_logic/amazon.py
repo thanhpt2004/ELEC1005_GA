@@ -7,7 +7,29 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 class Amazon:
+    """
+    A class representing an Amazon web scraper.
+
+    Attributes:
+        section (str): The section of Amazon website to scrape.
+        options (webdriver.ChromeOptions): Chrome options for the web driver.
+        driver (webdriver.Chrome): The Chrome web driver.
+
+    Methods:
+        __init__(self, section): Initializes a new instance of the Amazon class.
+        lazy_loading(self, wait_time=2): Performs lazy loading of the web page.
+        define_urls(self): Defines the URLs for the specified section.
+        links_ranks(self): Retrieves the links and ranks of the products.
+        content(self, url): Retrieves the content of a specific URL.
+    """
+
     def __init__(self, section):
+        """
+        Initializes a new instance of the Amazon class.
+
+        Args:
+            section (str): The section of Amazon website to scrape.
+        """
         self.section = section
         self.options = webdriver.ChromeOptions()
         self.options.add_argument("--headless")
@@ -16,6 +38,15 @@ class Amazon:
         )
 
     def lazy_loading(self, wait_time=2):
+        """
+        Performs lazy loading of the web page.
+
+        Args:
+            wait_time (int): The time to wait for the page to load (default is 2 seconds).
+
+        Returns:
+            webdriver.Chrome: The Chrome web driver.
+        """
         current_height = self.driver.execute_script("return document.body.scrollHeight")
 
         while True:
@@ -39,12 +70,24 @@ class Amazon:
         return self.driver
 
     def define_urls(self):
+        """
+        Defines the URLs for the specified section.
+
+        Returns:
+            tuple: A tuple containing the URLs for page 1 and page 2.
+        """
         product_section = self.section
         url_pg_1 = f"https://www.amazon.com.au/gp/bestsellers/{product_section}/ref=zg_bs_pg_1_{product_section}?ie=UTF8&pg=1"
         url_pg_2 = f"https://www.amazon.com.au/gp/bestsellers/{product_section}/ref=zg_bs_pg_2_{product_section}?ie=UTF8&pg=2"
         return url_pg_1, url_pg_2
 
     def links_ranks(self):
+        """
+        Retrieves the links and ranks of the products.
+
+        Returns:
+            tuple: A tuple containing the links and ranks of the products.
+        """
         links = []
         ranks = []
 
@@ -68,6 +111,15 @@ class Amazon:
         return links, ranks
 
     def content(self, url):
+        """
+        Retrieves the content of a specific URL.
+
+        Args:
+            url (str): The URL to retrieve the content from.
+
+        Returns:
+            BeautifulSoup: The parsed HTML content of the page.
+        """
         self.driver.get(url)
         self.lazy_loading()
         page_content = self.driver.page_source
@@ -108,6 +160,15 @@ def valid_sections():
 
 
 def product_name(soup):
+    """
+    Extracts the name of a product from the given BeautifulSoup object.
+
+    Parameters:
+    - soup: A BeautifulSoup object representing the HTML content of a webpage.
+
+    Returns:
+    - name: The name of the product as a string. If the name cannot be found, it returns "Could Not Find a Name".
+    """
     try:
         name = soup.find("span", attrs={"id": "productTitle"}).text.strip()
     except:
@@ -116,6 +177,15 @@ def product_name(soup):
 
 
 def product_price(soup):
+    """
+    Extracts the price of a product from the given BeautifulSoup object.
+
+    Parameters:
+    - soup: BeautifulSoup object representing the HTML content of a webpage.
+
+    Returns:
+    - price: The price of the product as a string. If the price cannot be found, returns "Could Not Find a Price".
+    """
     try:
         price = soup.find("span", attrs={"class": "a-price"}).text.strip()
     except:
@@ -124,6 +194,15 @@ def product_price(soup):
 
 
 def product_rating(soup):
+    """
+    Extracts the rating of a product from the given BeautifulSoup object.
+
+    Parameters:
+    - soup: A BeautifulSoup object representing the HTML content of a webpage.
+
+    Returns:
+    - rating: The rating of the product as a string. If the rating cannot be found, returns "Could Not Find a Rating".
+    """
     try:
         rating = soup.find(
             "span", attrs={"data-hook": "rating-out-of-text"}
@@ -131,27 +210,3 @@ def product_rating(soup):
     except:
         rating = "Could Not Find a Rating"
     return rating
-
-
-# test_amazon = Amazon("electronics")
-
-# urls = test_amazon.define_urls()
-# section_links = []
-# section_ranks = []
-
-
-# for url in urls:
-#     test_amazon.driver.get(url)
-#     test_amazon.lazy_loading()
-#     plinks, pranks = test_amazon.links_ranks()
-#     section_links.extend(plinks)
-#     section_ranks.extend(pranks)
-
-
-# # print(section_links)
-
-# for link in section_links:
-#     content = test_amazon.content(link)
-#     print(product_name(content))
-#     print(product_price(content))
-#     print(product_rating(content))
