@@ -215,10 +215,10 @@
     </form>
     {#if data}
       {#each Object.keys(data) as section}
-        <h2>{section}</h2>
+        <h2 class="text-2xl font-semibold">{section}</h2>
         {#each data[section].product_names as name, index}
           <div>
-            <h3>{name}</h3>
+            <h3 class="text-xl">{name}</h3>
             <p>Price: {data[section].product_prices[index]}</p>
             <p>Rating: {data[section].product_ratings[index]}</p>
           </div>
