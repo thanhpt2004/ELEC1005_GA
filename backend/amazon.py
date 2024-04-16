@@ -187,7 +187,8 @@ def product_price(soup):
     - price: The price of the product as a string. If the price cannot be found, returns "Could Not Find a Price".
     """
     try:
-        price = soup.find("span", attrs={"class": "a-price"}).text.strip()
+        price_area = soup.find("span", attrs={"class": "a-price"}).text.strip()
+        price = price_area.find("span", attrs={"class": "a-offscreen"}).text.strip()
     except:
         price = "Could Not Find a Price"
     return price
@@ -210,3 +211,12 @@ def product_rating(soup):
     except:
         rating = "Could Not Find a Rating"
     return rating
+
+
+def product_photo(soup):
+    try:
+        photo = soup.find("img", attrs={"id": "landingImage"})
+        photo_url = photo["src"]
+    except:
+        photo_url = "Could Not Find a Photo"
+    return photo_url
