@@ -36,7 +36,7 @@
       (key) => sections[key]
     );
     console.log(selectedSections);
-    const response = await fetch("http://127.0.0.1:5100/api/amazon", {
+    const response = await fetch("http://127.0.0.1:6969/api/amazon", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
