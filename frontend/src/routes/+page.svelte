@@ -6,6 +6,5 @@
 
 <main class="flex flex-col">
   <Hero />
-  <Content />
-  <ScraperData />
+  <!-- <ScraperData /> -->
 </main>

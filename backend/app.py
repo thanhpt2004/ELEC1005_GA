@@ -30,6 +30,7 @@ def amazon_api():
         product_names = []
         product_prices = []
         product_ratings = []
+        product_images = []
 
         for url in urls:
             print(url)
@@ -44,11 +45,13 @@ def amazon_api():
             product_names.append(amazon.product_name(content))
             product_prices.append(amazon.product_price(content))
             product_ratings.append(amazon.product_rating(content))
+            product_images.append(amazon.product_photo(content))
 
         result[section] = {
             "product_names": product_names,
             "product_prices": product_prices,
             "product_ratings": product_ratings,
+            "product_images": product_images,
         }
 
     return jsonify(result)

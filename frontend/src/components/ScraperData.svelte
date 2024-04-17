@@ -221,6 +221,7 @@
             <h3 class="text-xl">{name}</h3>
             <p>Price: {data[section].product_prices[index]}</p>
             <p>Rating: {data[section].product_ratings[index]}</p>
+            <p>Image: {data[section].product_images[index]}</p>
           </div>
         {/each}
       {/each}

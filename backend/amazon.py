@@ -189,7 +189,7 @@ def product_price(soup):
     - price: The price of the product as a string. If the price cannot be found, returns "Could Not Find a Price".
     """
     try:
-        price_area = soup.find("span", attrs={"class": "a-price"}).text.strip()
+        price_area = soup.find("span", attrs={"class": "a-price"})
         price = price_area.find("span", attrs={"class": "a-offscreen"}).text.strip()
     except:
         price = "Could Not Find a Price"
