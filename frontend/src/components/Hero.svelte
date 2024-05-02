@@ -17,7 +17,7 @@
     "I haven't had my coffee yet.",
     "Really trying.",
     "I'm not a very fast reader.",
-    "Sorry...",
+    "Sorry...:(",
   ];
   let index = 0;
   let intervalid;
@@ -62,7 +62,7 @@
       buttonText = buttonTexts[index];
     }, 4000);
     const selectedSections = Object.keys(sections).filter(
-      (key) => sections[key]
+      (key) => sections[key],
     );
     console.log(selectedSections);
     const response = await fetch("http://127.0.0.1:6969/api/amazon", {
