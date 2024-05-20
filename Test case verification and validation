@@ -1,0 +1,167 @@
+Feature 1: Login Button
+Verification:
+Ensure the login button at the login page function can 
+Test Case 1.1: Valid User Login
+•	Test Scenario ID: TS001
+•	Test Scenario Description: Verify user can log in with valid credentials
+•	Test Case ID: TC001-01
+•	Test Case Description: Test login functionality with valid user email and password
+•	Test Steps:
+•	Navigate to the login page.
+•	Enter a valid user email.
+•	Enter a valid password.
+•	Click on the 'Login' button.
+•	Preconditions: User must have a registered account with valid credentials.
+•	Test Data:
+•	Username: skim@uni.sydney.edu.au
+•	Password: Sean2024!
+•	Postconditions: User is logged into the application.
+•	Expected Results: User should be redirected to the homepage with a welcome message.
+•	Actual Result: [To be filled after execution]
+•	Status: [Pass/Fail]
+Test Case 1.2: Invalid User Login
+•	Test Scenario ID: TS001
+•	Test Scenario Description: Verify user cannot log in with invalid credentials
+•	Test Case ID: TC001-02
+•	Test Case Description: Test login functionality with invalid username or password
+•	Test Steps:
+•	Navigate to the login page.
+•	Enter an invalid user email or password.
+•	Click on the 'Login' button.
+•	Preconditions: User must have an account but use invalid credentials for the test.
+•	Test Data:
+•	Username: lwallace@uni.sydney.edu.au
+•	Password: invalidPassword
+•	Postconditions: User is not logged into the application.
+•	Expected Results: User should see an error message indicating incorrect password.
+•	Actual Result: [To be filled after execution]
+•	Status: [Pass/Fail]
+Test Scenario 2: Register a New Account
+Test Case 2.1: Successful User Registration
+•	Test Scenario ID: TS002
+•	Test Scenario Description: Verify user can register a new account with valid details
+•	Test Case ID: TC002-01
+•	Test Case Description: Test registration functionality with valid user details
+•	Test Steps:
+•	Navigate to the registration page.
+•	Enter a valid password and email address.
+•	Click on the 'Register' button.
+•	Preconditions: None.
+•	Test Data:
+•	User email: dnguyen@uni.sydney.edu.au
+•	Password: Diana2024!
+•	Postconditions: A new user account is created.
+•	Expected Results: User should receive a confirmation message and be redirected to the login page.
+•	Actual Result: [To be filled after execution]
+•	Status: [Pass/Fail]
+Test Case 2.2: User Registration with Existing Username
+•	Test Scenario ID: TS002
+•	Test Scenario Description: Verify user cannot register with an already existing user email
+•	Test Case ID: TC002-02
+•	Test Case Description: Test registration functionality with a username that is already taken
+•	Test Steps:
+•	Navigate to the registration page.
+•	Enter an existing username, valid password, and email address.
+•	Click on the 'Register' button.
+•	Preconditions: User email must already be taken by another user.
+•	Test Data:
+•	Username: tphung@uni.sydney.edu.au
+•	Password: thisacountAlreadyExsiting 
+•	Postconditions: No new user account is created.
+•	Expected Results: User should see an error message indicating the user email is already taken.
+•	Actual Result: [To be filled after execution]
+•	Status: [Pass/Fail]
+Test Scenario 3: Filtering Scraped Data
+Test Case 3.1: Filter by Category
+Test Scenario ID: TS003
+•	Test Scenario Description: Verify users can filter by category
+•	Test Case ID: TC003-01
+•	Test Case Description: Test search functionality by entering a keyword
+•	Test Steps:
+1.	Navigate to the search bar.
+2.	Enter the keyword "Computers".
+3.	Click on the 'Search' button.
+•	Preconditions: There should be data for products in the “Computers” category in the database.
+•	Test Data: Keyword: "Computers"
+•	Postconditions: Search results are displayed.
+•	Expected Results: User should see a list of products matching the category “Computers”.
+•	Actual Result: Products are displayed correctly
+•	Status: Pass
+Test Case 3.2: Filter by Price
+•	Test Scenario ID: TS005
+•	Test Scenario Description: Verify users can filter for products in a price range.
+•	Test Case ID: TC005-01
+•	Test Case Description: Test search functionality by entering a price range
+•	Test Steps:
+•	Navigate to the price range search section.
+•	Enter a minimum price of $500 and a maximum price of $1500.
+•	Click on the 'Search' button.
+•	Preconditions: There should be product data (including prices) in the database.
+•	Test Data:
+•	Minimum Price: $500
+•	Maximum Price: $1500
+•	Postconditions: Search results are displayed.
+•	Expected Results: User should see a list of products within the specified price range.
+•	Actual Result: [To be filled after execution]
+•	Status: [Pass/Fail]
+
+
+Test Scenario 4: User is able to view product page on external site
+Test Case 4.1: Link to external site
+Test Scenario ID: TS004
+•	Test Scenario Description: Verify user can navigate to external site to purchase product
+•	Test Case ID: TC004-01
+•	Test Case Description: Navigate to external site by provided link
+•	Test Steps:
+•	Search for/filter for or find a product on the home page.
+•	Find the link to the product on the seller’s website.
+•	Click the link.
+•	Preconditions: Product links should be in the database.
+•	Test Data:
+•	TBD
+•	Postconditions: User is sent to the seller’s website.
+•	Expected Results: User should be sent to the seller’s website.
+•	Actual Result: [To be filled after execution]
+•	Status: [Pass/Fail]
+Test Scenario 5: Save products for later
+Test Scenario ID: TS005
+•	Test Scenario Description: Verify users can save products viewed on the site for later.
+•	Test Case ID: TC005-01
+•	Test Case Description: Save a product to user’s ‘saved’ section.
+•	Test Steps:
+•	Search for/filter for or find a product on the home page.
+•	Find the ‘bookmark’ icon in the top right of the product information page.
+•	Click the bookmark option
+•	Navigate to the ‘saved’ section by clicking on the account photo and then ‘Saved’.
+•	Preconditions: Product information should be in the database.
+•	Test Data:
+•	TBD
+•	Postconditions: Product appears in ‘saved’ section.
+•	Expected Results: User should be able to see products they have previously saved in their ‘saved’ section.
+•	Actual Result: [To be filled after execution]
+•	Status: [Pass/Fail]
+Test Scenario 6: Manage User Account - Change Password
+Test Case 6.1: Change User Password
+•	Test Scenario ID: TS006
+•	Test Scenario Description: Verify user can change their account password
+•	Test Case ID: TC006-01
+•	Test Case Description: Test password change functionality
+•	Test Steps:
+•	Log in to the application with valid credentials.
+•	Navigate to the 'Account Settings' or 'Profile' section.
+•	Click on 'Change Password'.
+•	Enter the current password.
+•	Enter the new password.
+•	Confirm the new password.
+•	Click on 'Save' or 'Update' button.
+•	Preconditions: User must be logged in and know their current password.
+•	Test Data:
+•	Current Password: Adeline2024!
+•	New Password: newPassword456
+•	Confirm New Password: newPassword456
+•	Postconditions: User's password is updated.
+•	Expected Results: User should see a confirmation message indicating the password has been successfully changed, and the next login should require the new password.
+•	Actual Result: [To be filled after execution]
+•	Status: [Pass/Fail]
+
+
