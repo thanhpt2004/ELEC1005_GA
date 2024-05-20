@@ -2,3 +2,4 @@
 #510526177 Hyunwoo (Eric) Jeon
 #530003731 Adeline Wong
 #530832669 Sarah Afshaan
+#500563706 Sean Kim
